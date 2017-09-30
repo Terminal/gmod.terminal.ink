@@ -1,0 +1,9 @@
+# npm crap
+node_modules
+npm-debug.log
+
+# No API files please thank you
+api.json
+/config/default.json
+/vnc.jpg
+/rethinkdb/

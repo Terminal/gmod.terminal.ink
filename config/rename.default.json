@@ -1,0 +1,17 @@
+{
+	"steam": {
+		"realm": "http://127.0.0.1:8080/",
+		"apiKey": ""
+	},
+	"webserver": {
+		"port": 8080,
+		"secret": "",
+		"location": "http://127.0.0.1:8080/",
+		"auth": ""
+	},
+	"rethinkdb": {
+		"host": "127.0.0.1",
+		"port": 28015,
+		"db": "steam"
+	}
+}

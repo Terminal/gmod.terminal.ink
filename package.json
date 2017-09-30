@@ -1,0 +1,42 @@
+{
+  "name": "mss-discord",
+  "version": "2017.6.15",
+  "description": "Moustacheminer Server Services, but for Garry's Mod, using Rethonk.",
+  "main": "./server",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo Testing is not available.",
+    "dev": "./node_modules/nodemon/bin/nodemon.js ./server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moustacheminer/gmod-rethonk-webserver.git"
+  },
+  "keywords": [
+    "mss"
+  ],
+  "author": "7coil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moustacheminer/gmod-rethonk-webserver/issues"
+  },
+  "homepage": "https://moustacheminer.com/",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "config": "^1.26.1",
+    "consolidate": "^0.14.5",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-session": "^1.15.5",
+    "i18n": "^0.8.3",
+    "passport": "^0.4.0",
+    "passport-steam": "^1.0.8",
+    "pug": "^2.0.0-rc.4",
+    "rethinkdb": "^2.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.7.0",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0"
+  }
+}

@@ -1,0 +1,24 @@
+#section {
+	height: auto;
+}
+
+body {
+	background-image: url('https://moustacheminer.com/img/background.jpg');
+	background-size: cover;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.card-block {
+	background-color: rgba(3, 169, 244, 0.7);
+	height: 10vh;
+}
+
+.card {
+	background-color: rgba(255, 255, 255, 0.7) !important;
+}
