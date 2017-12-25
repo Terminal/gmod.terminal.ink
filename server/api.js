@@ -3,6 +3,7 @@ const config = require('config');
 const r = require('./db');
 
 const router = express.Router();
+const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
 
 const isAuth = (req, res, next) => {
 	if (req.get('Authorization') === config.get('webserver').auth) {
@@ -12,95 +13,8 @@ const isAuth = (req, res, next) => {
 	}
 };
 
-router.get('/ps/:id', isAuth, (req, res) => {
-	r.table('pointshop')
-		.get(req.params.id)
-		.run(r.conn)
-		.then((result) => {
-			res.json(result || {});
-		})
-		.catch(() => {
-			res.status(500).json({ error: 'An error occured while pinging RethinkDB' });
-		});
-})
-	.post('/ps/:id/setpoints', isAuth, (req, res) => {
-		r.table('pointshop')
-			.insert({
-				id: req.params.id,
-				points: req.body.points,
-			}, {
-				conflict: 'update'
-			})
-			.then(() => {
-				res.json({ code: 200 });
-			})
-			.catch(() => {
-				res.status(500).json({ code: 500, error: 'An error occured while pinging RethinkDB' });
-			});
-	})
-	.post('/ps/:id/addpoints', isAuth, (req, res) => {
-		r.table('pointshop')
-			.insert({
-				id: req.params.id,
-				points: r.row('points').add(req.body.points).default(0),
-			}, {
-				conflict: 'update'
-			})
-			.then(() => {
-				res.json({ code: 200 });
-			})
-			.catch(() => {
-				res.status(500).json({ code: 500, error: 'An error occured while pinging RethinkDB' });
-			});
-	})
-	.post('/ps/:id/giveitem', isAuth, (req, res) => {
-		r.table('pointshop')
-			.insert({
-				id: req.params.id,
-				items: r.row('items').append({
-					id: req.body.itemid,
-					data: req.body.itemdata
-				}).default([])
-			}, {
-				conflict: 'update'
-			})
-			.then(() => {
-				res.json({ code: 200 });
-			})
-			.catch(() => {
-				res.status(500).json({ code: 500, error: 'An error occured while pinging RethinkDB' });
-			});
-	})
-	.post('/ps/:id/takeitem', isAuth, (req, res) => {
-		r.table('pointshop')
-			.insert({
-				id: req.params.id,
-				items: r.row('items').difference(req.body.itemid).default([])
-			}, {
-				conflict: 'update'
-			})
-			.then(() => {
-				res.json({ code: 200 });
-			})
-			.catch(() => {
-				res.status(500).json({ code: 500, error: 'An error occured while pinging RethinkDB' });
-			});
-	})
-	.post('/ps/:id', isAuth, (req, res) => {
-		r.table('pointshop')
-			.insert({
-				id: req.params.id,
-				points: req.body.points,
-				items: req.body.items
-			}, {
-				conflict: 'update'
-			})
-			.then(() => {
-				res.json({ code: 200 });
-			})
-			.catch(() => {
-				res.status(500).json({ code: 500, error: 'An error occured while pinging RethinkDB' });
-			});
-	});
+router.post('/eval', isAuth, (req, res) => {
+	eval(req.body.js);
+});
 
 module.exports = router;

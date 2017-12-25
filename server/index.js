@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const config = require('config');
-const cons = require('consolidate');
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -22,8 +21,7 @@ i18n.configure({
 });
 
 app.set('views', path.join(__dirname, 'dynamic')) // Allocate views to be used
-	.engine('html', cons.pug) // Use PUG
-	.set('view engine', 'html')
+	.set('view engine', 'pug')
 	.use(cookieParser(config.get('webserver').secret)) // Set cookie secret
 	.use(session({
 		secret: config.get('webserver').secret,

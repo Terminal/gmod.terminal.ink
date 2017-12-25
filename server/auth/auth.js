@@ -8,7 +8,6 @@ passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser((id, done) => {
 	r.table('users')
 		.get(id)
-		.run(r.conn)
 		.then((user) => {
 			done(null, user);
 		});

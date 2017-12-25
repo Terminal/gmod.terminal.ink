@@ -10,8 +10,12 @@
 		"auth": ""
 	},
 	"rethinkdb": {
-		"host": "127.0.0.1",
-		"port": 28015,
-		"db": "steam"
-	}
+		"db": "gmod",
+		"servers": [
+			{
+				"host": "127.0.0.1",
+				"port": 28015
+			}
+		]
+	},
 }
