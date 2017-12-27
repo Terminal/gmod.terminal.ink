@@ -30,17 +30,11 @@ const isAuth = (req, res, next) => {
 router.post('/eval', isAuth, (req, res) => {
 	if (req.body.js) {
 		try {
-			const timeout = setTimeout(() => {
-				res.status(500).json({
-					error: 'Timeout error (5 seconds). JS code sent to the server must call "res.send()" or other counterpart to return to the server.'
-				});
-			}, 5000);
+			console.log(req.body.js);
 			eval(req.body.js); // eslint-disable-line no-eval
-			if (res.headersSent) {
-				clearTimeout(timeout);
-			}
 		} catch (e) {
 			if (e) {
+				if (e.stack) console.log(e.stack);
 				let error = e;
 				if (typeof error !== 'string') {
 					error = inspect(error, {
