@@ -89,7 +89,7 @@ function PROVIDER:GetData(ply, callback)
 					body.points or 0,
 					body.items or {}
 				)
-			else
+			end
 		end
 	)
 end
