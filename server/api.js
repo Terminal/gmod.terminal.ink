@@ -19,7 +19,7 @@ const isAuth = (req, res, next) => {
 
 	// Check if the auth header is correct, and that the webserver allows connections from this IP address
 	if (!ip || !config.get('webserver').allow.includes(ip)) {
-		res.status(400).json({ error: 'The server is not authorised to access this endpoint. Edit config/default.json, and edit the webserver.allow array with the IP address of the server.' });
+		res.status(400).json({ error: `The server is not authorised to access this endpoint. Edit config/default.json, and edit the webserver.allow array with ${ip}` });
 	} else if (req.get('Authorization') !== config.get('webserver').auth) {
 		res.status(400).json({ error: 'Your authorisation header is incorrect. Check you have copied the code correctly.' });
 	} else {
