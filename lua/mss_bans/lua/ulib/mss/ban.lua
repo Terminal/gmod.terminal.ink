@@ -110,18 +110,20 @@ function ULib.refreshBans()
 		function(body)
 			ULib.bans = {}
 			-- FUCKING LUA USES 1
-			for i = 1, #body do
-				local res = body[i]
-				ban = {}
-				ban.steamID = res.id
-				ban.time = res.timestamp
-				ban.unban = res.unban
-				ban.reason = res.reason
-				ban.name = res.name
-				ban.admin = res.admin and res.admin.name
-				ban.modified_admin = res.modified and res.modified.name
-				ban.modified_time = res.modified and res.modified.timestamp
-				ULib.bans[res.id] = ban
+			if body then
+				for i = 1, #body do
+					local res = body[i]
+					ban = {}
+					ban.steamID = res.id
+					ban.time = res.timestamp
+					ban.unban = res.unban
+					ban.reason = res.reason
+					ban.name = res.name
+					ban.admin = res.admin and res.admin.name
+					ban.modified_admin = res.modified and res.modified.name
+					ban.modified_time = res.modified and res.modified.timestamp
+					ULib.bans[res.id] = ban
+				end
 			end
 		end
 	)
