@@ -17,8 +17,6 @@ const isAuth = (req, res, next) => {
 	// If there was no IP set, set it to the remote address.
 	ip = ip || req.connection.remoteAddress;
 
-	console.log(ip);
-
 	// Check if the auth header is correct, and that the webserver allows connections from this IP address
 	if (!ip || !config.get('webserver').allow.includes(ip)) {
 		res.status(400).json({ error: 'The server is not authorised to access this endpoint. Edit config/default.json, and edit the webserver.allow array with the IP address of the server.' });
