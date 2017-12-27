@@ -84,10 +84,12 @@ function PROVIDER:GetData(ply, callback)
 			ply:SteamID64() or 'null'
 		),
 		function(body)
-			callback(
-				body.points or 0,
-				body.items or {}
-			)
+			if (body) then
+				callback(
+					body.points or 0,
+					body.items or {}
+				)
+			else
 		end
 	)
 end

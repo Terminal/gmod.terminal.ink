@@ -129,4 +129,4 @@ function ULib.refreshBans()
 	)
 end
 
-ULib.refreshBans()
+hook.Add( "Initialize", "mss_loadbans", ULib.refreshBans)
