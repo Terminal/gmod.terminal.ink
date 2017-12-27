@@ -1,4 +1,5 @@
 local BAN_MESSAGE = 'You have been banned from /r/pyongyang. See https://garry.moustacheminer.com/bans'
+local next = next
 
 --[[
 	Override the ULib bans system
@@ -110,7 +111,7 @@ function ULib.refreshBans()
 		function(body)
 			ULib.bans = {}
 			-- FUCKING LUA USES 1
-			if body then
+			if next(body) != nil then
 				for i = 1, #body do
 					local res = body[i]
 					ban = {}
