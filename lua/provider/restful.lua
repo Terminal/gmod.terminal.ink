@@ -50,7 +50,7 @@ local function createUser(ply, callback)
 	eval(
 		string.format(
 			[[
-				r.table('users')
+				r.table('points')
 					.insert({
 						id: "%s",
 						items: {}
@@ -74,7 +74,7 @@ function PROVIDER:GetData(ply, callback)
 	eval(
 		string.format(
 			[[
-				r.table('users')
+				r.table('points')
 					.get("%s")
 					.run()
 					.then((result) => {
@@ -99,7 +99,7 @@ function PROVIDER:SetPoints(ply, set_points)
 			eval(
 				string.format(
 					[[
-						r.table('users')
+						r.table('points')
 							.get("%s")
 							.update({ points: %s })
 							.run()
@@ -123,7 +123,7 @@ function PROVIDER:GivePoints(ply, points)
 			eval(
 				string.format(
 					[[
-						r.table('users')
+						r.table('points')
 							.get("%s")
 							.update({
 								points: r.row('points').default(0).add(%s)
@@ -149,7 +149,7 @@ function PROVIDER:TakePoints(ply, points)
 			eval(
 				string.format(
 					[[
-						r.table('users')
+						r.table('points')
 							.get("%s")
 							.update({
 								points: r.row('points').default(0).sub(%s)
@@ -179,7 +179,7 @@ function PROVIDER:GiveItem(ply, item_id, data)
 			eval(
 				string.format(
 					[[
-						r.table('users')
+						r.table('points')
 							.get("%s")
 							.update({
 								items: {
@@ -208,7 +208,7 @@ function PROVIDER:TakeItem(ply, item_id)
 			eval(
 				string.format(
 					[[
-						r.table('users')
+						r.table('points')
 							.get("%s")
 							.replace(
 								r.row.without({
@@ -235,7 +235,7 @@ function PROVIDER:SetData(ply, points, items)
 	eval(
 		string.format(
 			[[
-				r.table('users').insert({
+				r.table('points').insert({
 					id: "%s",
 					items: %s
 				}, {
