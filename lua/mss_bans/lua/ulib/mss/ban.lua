@@ -77,6 +77,7 @@ function ULib.addBan(steamid, time, reason, name, admin)
 		ULib.kick(ply, reason, nil, true)
 	end
 	RunConsoleCommand('kickid', steamid, BAN_MESSAGE)
+	ULib.refreshBans()
 end
 
 function ULib.unban(steamid)

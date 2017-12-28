@@ -6,6 +6,8 @@ const session = require('express-session');
 const path = require('path');
 const auth = require('./auth/auth');
 const authM = require('./auth');
+const bansM = require('./bans');
+const docsM = require('./docs');
 const apiM = require('./api');
 const i18n = require('i18n');
 
@@ -44,6 +46,8 @@ app.set('views', path.join(__dirname, 'dynamic')) // Allocate views to be used
 	})
 	.use('/auth', authM)
 	.use('/api', apiM)
+	.use('/bans', bansM)
+	.use('/docs', docsM)
 	.use(express.static(path.join(__dirname, 'static'))) // Pull static files from /src/static
 	.use('*', (req, res) => {
 		// Give off a 404 if the chain ends here

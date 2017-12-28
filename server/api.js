@@ -53,6 +53,14 @@ router.post('/eval', isAuth, (req, res) => {
 		res.status(400).json({ error: 'No JS was provided to be executed' });
 	}
 })
+	.get('/bans', async (req, res) => {
+		const result = await r.table('bans');
+		res.json(result);
+	})
+	.get('/points', async (req, res) => {
+		const result = await r.table('points');
+		res.json(result);
+	})
 	.use('*', (req, res) => {
 		console.log(req.originalUrl);
 		res.status(404).json({ error: 'This endpoint does not exist, or does not support this HTTP method' });

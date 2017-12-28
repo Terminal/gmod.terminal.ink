@@ -28,6 +28,7 @@
 		"express": "^4.15.3",
 		"express-session": "^1.15.5",
 		"i18n": "^0.8.3",
+		"marked": "^0.3.9",
 		"passport": "^0.4.0",
 		"passport-steam": "^1.0.8",
 		"pug": "^2.0.0-rc.4",
