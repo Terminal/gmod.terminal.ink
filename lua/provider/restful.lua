@@ -5,25 +5,33 @@ local AUTH = 'kromatic is a gay'
     HTTP REST endpoint
 ]]--
 
-function fetch(endpoint, payload, callback)
-  http.Post(API_URL .. endpoint, {
-    payload = util.TableToJSON(payload)
-  }, function(body)
-    local result = util.JSONToTable(body);
-    if callback then
-      return callback(util.JSONToTable(body))
-    end
-  end , nil, {
-    Authorization = AUTH
-  })
+local function fetch(endpoint, payload, callback)
+  print('out: ' .. API_URL .. endpoint)
+  http.Post(
+    API_URL .. endpoint,
+    {
+      payload = util.TableToJSON(payload)
+    },
+    function(body)
+      local result = util.JSONToTable(body);
+      if callback then
+        return callback(util.JSONToTable(body))
+      end
+    end,
+    function(error)
+      print(error)
+    end,
+    {
+      Authorization = AUTH
+    }
+  )
 end
 
 local function createUser(ply, callback)
-  print(ply:SteamID64())
   fetch(
     '/ps/create-user',
     {
-      id = ply:SteamID64() or 'null'
+      id = ply:SteamID() or 'null'
     },
     function(body)
       callback()
@@ -35,7 +43,7 @@ function PROVIDER:GetData(ply, callback)
   fetch(
     '/ps/get-data',
     {
-      id = ply:SteamID64() or 'null'
+      id = ply:SteamID() or 'null'
     },
     function(body)
       if (body) then
@@ -55,7 +63,7 @@ function PROVIDER:SetPoints(ply, points)
       fetch(
         '/ps/set-points',
         {
-          id = ply:SteamID64() or 'null',
+          id = ply:SteamID() or 'null',
           points = points
         },
         nil
@@ -71,7 +79,7 @@ function PROVIDER:GivePoints(ply, points)
       fetch(
         '/ps/give-points',
         {
-          id = ply:SteamID64() or 'null',
+          id = ply:SteamID() or 'null',
           points = points
         },
         nil
@@ -87,7 +95,7 @@ function PROVIDER:TakePoints(ply, points)
       fetch(
         '/ps/take-points',
         {
-          id = ply:SteamID64() or 'null',
+          id = ply:SteamID() or 'null',
           points = points
         },
         nil
@@ -107,7 +115,7 @@ function PROVIDER:GiveItem(ply, item_id, data)
       fetch(
         '/ps/give-item',
         {
-          id = ply:SteamID64() or 'null',
+          id = ply:SteamID() or 'null',
           item = item_id,
           data = data
         },
@@ -124,7 +132,7 @@ function PROVIDER:TakeItem(ply, item_id)
       fetch(
         '/ps/take-item',
         {
-          id = ply:SteamID64() or 'null',
+          id = ply:SteamID() or 'null',
           item = item_id,
         },
         nil -- Nothing needs to be returned
@@ -137,7 +145,7 @@ function PROVIDER:SetData(ply, points, items)
   fetch(
     '/ps/set-data',
     {
-      id = ply:SteamID64() or 'null',
+      id = ply:SteamID() or 'null',
       items = items
     },
     nil
