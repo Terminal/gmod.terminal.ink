@@ -7,7 +7,7 @@ local AUTH = 'kromatic is a gay'
 
 function fetch(endpoint, payload, callback)
   http.Post(API_URL .. endpoint, {
-		payload = util.TableToJSON(payload)
+    payload = util.TableToJSON(payload)
   }, function(body)
     local result = util.JSONToTable(body);
     if callback then
