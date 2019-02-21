@@ -7,7 +7,7 @@ const router = express.Router();
 router
   .use((req, res, next) => {
     if (webserverConfig.auth === req.get('Authorization')) {
-      req.payload = JSON.parse(req.body.payload || {});
+      req.payload = req.body && typeof req.body.payload === 'object' ? JSON.parse(req.body.payload) : {};
       next();
     } else {
       res.status(400).json({
