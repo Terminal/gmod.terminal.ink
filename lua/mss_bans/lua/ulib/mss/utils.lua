@@ -1,23 +1,18 @@
-local API_URL = 'http://127.0.0.1:8080/api/eval'
-local AUTH = 'authentication'
+local API_URL = 'http://127.0.0.1/api/v1'
+local AUTH = 'kromatic is a gay'
 
 --[[
     HTTP REST endpoint
 ]]--
 
-function eval(js, callback)
-	http.Post(API_URL, {
-		js = js
-	}, function(body)
-		print(body)
-		if callback then
-			return callback(util.JSONToTable(body))
-		end
-	end , nil, {
-		Authorization = AUTH
-	})
-end
-
-function makeSafe(str)
-	return string.Replace(str, [["]], [[\"]])
+function fetch(endpoint, payload, callback)
+  http.Post(API_URL .. endpoint, {
+		payload = util.TableToJSON(payload)
+  }, function(body)
+    if callback then
+      return callback(util.JSONToTable(body))
+    end
+  end , nil, {
+    Authorization = AUTH
+  })
 end
