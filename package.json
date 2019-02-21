@@ -1,12 +1,10 @@
 {
-  "name": "mss-discord",
-  "version": "2017.6.15",
-  "description": "Moustacheminer Server Services, but for Garry's Mod, using Rethonk.",
+  "name": "gmod-webserver",
+  "version": "2019.2.21",
+  "description": "A Garry's mod webserver",
   "main": "./server",
   "scripts": {
-    "start": "node server/index.js",
-    "test": "echo Testing is not available.",
-    "dev": "./node_modules/nodemon/bin/nodemon.js ./server"
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,15 +21,7 @@
   "homepage": "https://moustacheminer.com/",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "config": "^1.26.1",
-    "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
-    "express-session": "^1.15.5",
-    "i18n": "^0.8.3",
-    "marked": "^0.3.9",
-    "passport": "^0.4.0",
-    "passport-steam": "^1.0.8",
-    "pug": "^2.0.3",
     "rethinkdbdash": "^2.3.31"
   },
   "devDependencies": {
