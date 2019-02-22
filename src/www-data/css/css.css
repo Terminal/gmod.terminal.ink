@@ -1,0 +1,49 @@
+@media screen and (min-width: 650px) {
+  .mobile {
+    display: none !important
+  }
+}
+
+@media screen and (max-width: 651px) {
+  .desktop {
+    display: none !important
+  }
+}
+
+.sidenav-darken {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  transition: opacity 0.3s;
+}
+
+.nav-container.default {
+  max-width: unset;
+  background-color: #282828;
+}
+
+.fullscreen {
+  height: 100vh;
+}
+
+.fullscreen.halfscreen {
+  height: 50vh;
+}
+
+.background {
+  filter: brightness(20%) blur(5px) !important;
+}
+
+.footer {
+  text-align: right;
+}
+
+.left-pad a {
+  margin-left: 10px;
+}

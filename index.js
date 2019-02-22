@@ -13,8 +13,7 @@ const checkDatabase = () =>
 
       return Promise.resolve();
     })
-    .then(() =>
-      r.tableList())
+    .then(() => r.tableList())
     .then((tableList) => {
       const promises = [];
 
