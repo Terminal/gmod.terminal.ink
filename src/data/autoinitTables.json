@@ -1,4 +1,6 @@
 [
   "points",
-  "bans"
+  "bans",
+  "ulib_groups",
+  "ulib_users"
 ]

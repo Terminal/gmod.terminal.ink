@@ -44,6 +44,68 @@ router
     r.table('bans')
       .then(data => res.json(data));
   })
+  .post('/ulib/ucl-save-groups', (req, res) => {
+    const data = [];
+
+    // Turn key-value into array
+    Object.keys(req.payload.groups).forEach((group) => {
+      data.push(Object.assign(req.payload.groups[group], {
+        id: group
+      }));
+    });
+
+    r.table('ulib_groups')
+      .delete()
+      .then(() => {
+        r.table('ulib_groups')
+          .insert(data)
+          .then(result => res.json(result));
+      });
+  })
+  .post('/ulib/ucl-reload-groups', (req, res) => {
+    r.table('ulib_groups')
+      .then((groups) => {
+        const data = {};
+
+        // Turn array into key-value
+        groups.forEach((group) => {
+          data[group.id] = group;
+        });
+
+        res.json(data);
+      });
+  })
+  .post('/ulib/ucl-save-users', (req, res) => {
+    const data = [];
+
+    // Turn key-value into array
+    Object.keys(req.payload.users).forEach((user) => {
+      data.push(Object.assign(req.payload.users[user], {
+        id: user
+      }));
+    });
+
+    r.table('ulib_users')
+      .delete()
+      .then(() => {
+        r.table('ulib_users')
+          .insert(data)
+          .then(result => res.json(result));
+      });
+  })
+  .post('/ulib/ucl-reload-users', (req, res) => {
+    r.table('ulib_users')
+      .then((users) => {
+        const data = {};
+
+        // Turn array into key-value
+        users.forEach((user) => {
+          data[user.id] = user;
+        });
+
+        res.json(data);
+      });
+  })
   .post('/ps/create-user', (req, res) => {
     r.table('points')
       .insert({
