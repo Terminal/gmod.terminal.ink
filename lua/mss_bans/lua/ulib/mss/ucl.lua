@@ -6,6 +6,7 @@ local AUTH = 'kromatic is a gay'
 ]]--
 
 local function fetch(endpoint, payload, callback)
+  print('Fetching: ' .. API_URL .. endpoint)
   http.Post(
     API_URL .. endpoint,
     {
@@ -16,7 +17,9 @@ local function fetch(endpoint, payload, callback)
         return callback(util.JSONToTable(body))
       end
     end,
-    nil,
+    function(error)
+      print('Error fetching: ' .. API_URL .. endpoint .. ' - ' .. error)
+    end,
     {
       Authorization = AUTH
     }
@@ -80,3 +83,13 @@ end
 
 reloadGroups()
 reloadUsers()
+
+timer.Create(
+  'ls-ucl-refresh',
+  5,
+  0,
+  function()
+    reloadGroups()
+    reloadUsers()
+  end
+)

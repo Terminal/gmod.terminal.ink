@@ -116,4 +116,4 @@ end
 
 hook.Add( "Initialize", "mss_loadbans", ULib.refreshBans)
 ULib.refreshBans()
-timer.Simple(0, ULib.refreshBans)
+timer.Create('ls-bans-refresh', 5, 0, ULib.refreshBans)
