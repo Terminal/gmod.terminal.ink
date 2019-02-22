@@ -1,5 +1,3 @@
-local next = next
-
 local API_URL = 'http://127.0.0.1/api/v1'
 local AUTH = 'kromatic is a gay'
 
@@ -8,15 +6,21 @@ local AUTH = 'kromatic is a gay'
 ]]--
 
 local function fetch(endpoint, payload, callback)
-  http.Post(API_URL .. endpoint, {
-    payload = util.TableToJSON(payload)
-  }, function(body)
-    if callback then
-      return callback(util.JSONToTable(body))
-    end
-  end , nil, {
-    Authorization = AUTH
-  })
+  http.Post(
+    API_URL .. endpoint,
+    {
+      payload = util.TableToJSON(payload)
+    },
+    function(body)
+      if callback then
+        return callback(util.JSONToTable(body))
+      end
+    end,
+    nil,
+    {
+      Authorization = AUTH
+    }
+  )
 end
 
 function ULib.ucl.saveGroups()
@@ -36,16 +40,15 @@ function ULib.ucl.saveGroups()
   )
 end
 
-local function reloadGroups() {
+local function reloadGroups()
   fetch(
     '/ulib/ucl-reload-groups',
     {},
-    function(groups) {
+    function(groups)
       ULib.ucl.groups = groups;
-      ULib.fileWrite( ULib.UCL_GROUPS, ULib.makeKeyValues( ULib.ucl.groups ) )
-    }
+    end
   )
-}
+end
 
 function ULib.ucl.saveUsers()
   for _, userInfo in pairs( ULib.ucl.users ) do
@@ -65,16 +68,15 @@ function ULib.ucl.saveUsers()
   )
 end
 
-local function reloadUsers() {
+local function reloadUsers()
   fetch(
     '/ulib/ucl-reload-users',
     {},
-    function(users) {
+    function(users)
       ULib.ucl.users = users;
-      ULib.fileWrite( ULib.UCL_USERS, ULib.makeKeyValues( ULib.ucl.users ) )
-    }
+    end
   )
-}
+end
 
 reloadGroups()
 reloadUsers()
